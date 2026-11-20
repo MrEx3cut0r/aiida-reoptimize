@@ -1,9 +1,26 @@
 """Static AiiDA workchains shipped with aiida-reoptimize."""
 
+from .Evaluation.abacus_evaluation import AbacusRelaxLatticeProblem, AbacusSCFLatticeProblem
 from .Evaluation.crystal_evaluation import CrystalLatticeProblem
 from .Evaluation.fleur_evaluators import (
     FleurRelaxLatticeProblem,
     FleurSCFLatticeProblem,
+)
+from .Optimization.Abacus import (
+    AdamAbacusRelaxOptimizer,
+    AdamAbacusSCFOptimizer,
+    BFGSAbacusRelaxOptimizer,
+    BFGSAbacusSCFOptimizer,
+    CDGAbacusRelaxOptimizer,
+    CDGAbacusSCFOptimizer,
+    G3PCXAbacusRelaxOptimizer,
+    G3PCXAbacusSCFOptimizer,
+    NRBOAbacusRelaxOptimizer,
+    NRBOAbacusSCFOptimizer,
+    PyMOOAbacusRelaxOptimizer,
+    PyMOOAbacusSCFOptimizer,
+    RMSpropAbacusRelaxOptimizer,
+    RMSpropAbacusSCFOptimizer,
 )
 from .Optimization.Crystal import (
     AdamCrystalOptimizer,
@@ -34,27 +51,43 @@ from .Optimization.FleurSCF import (
 )
 
 __all__ = [
+    "AbacusRelaxLatticeProblem",
+    "AbacusSCFLatticeProblem",
+    "AdamAbacusRelaxOptimizer",
+    "AdamAbacusSCFOptimizer",
     "AdamCrystalOptimizer",
     "AdamFleurRelaxOptimizer",
     "AdamFleurSCFOptimizer",
+    "BFGSAbacusRelaxOptimizer",
+    "BFGSAbacusSCFOptimizer",
     "BFGSCrystalOptimizer",
     "BFGSFleurRelaxOptimizer",
     "BFGSFleurSCFOptimizer",
+    "CDGAbacusRelaxOptimizer",
+    "CDGAbacusSCFOptimizer",
     "CDGCrystalOptimizer",
     "CDGFleurRelaxOptimizer",
     "CDGFleurSCFOptimizer",
     "CrystalLatticeProblem",
     "FleurRelaxLatticeProblem",
     "FleurSCFLatticeProblem",
+    "G3PCXAbacusRelaxOptimizer",
+    "G3PCXAbacusSCFOptimizer",
     "G3PCXCrystalOptimizer",
     "G3PCXFleurRelaxOptimizer",
     "G3PCXFleurSCFOptimizer",
+    "NRBOAbacusRelaxOptimizer",
+    "NRBOAbacusSCFOptimizer",
     "NRBOCrystalOptimizer",
     "NRBOFleurRelaxOptimizer",
     "NRBOFleurSCFOptimizer",
+    "PyMOOAbacusRelaxOptimizer",
+    "PyMOOAbacusSCFOptimizer",
     "PyMOOCrystalOptimizer",
     "PyMOOFleurRelaxOptimizer",
     "PyMOOFleurSCFOptimizer",
+    "RMSpropAbacusRelaxOptimizer",
+    "RMSpropAbacusSCFOptimizer",
     "RMSpropCrystalOptimizer",
     "RMSpropFleurRelaxOptimizer",
     "RMSpropFleurSCFOptimizer",

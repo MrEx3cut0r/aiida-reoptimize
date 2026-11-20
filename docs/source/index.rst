@@ -4,7 +4,7 @@ aiida-reoptimize documentation
 ``aiida-reoptimize`` is a framework for running advanced optimization workflows in
 computational materials science and chemistry, leveraging AiiDA workchains and the
 PyMOO optimization library. It supports lattice and atomic-position optimization for
-CRYSTAL and FLEUR simulation engines.
+CRYSTAL, FLEUR, and ABACUS simulation engines.
 
 .. toctree::
    :maxdepth: 2

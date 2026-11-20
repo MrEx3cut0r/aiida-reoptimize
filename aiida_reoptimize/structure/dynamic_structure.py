@@ -5,6 +5,7 @@ from typing import Any, Type
 
 import ase
 from aiida.engine import WorkChain
+from aiida.engine.processes.builder import ProcessBuilderNamespace
 from aiida.orm import Dict
 from ase.data import chemical_symbols
 
@@ -371,6 +372,40 @@ class StructureCalculator:
         else:
             raise StructureGenerationError(f"Cannot set '{last_key}' in structure input path {path}")
 
+    def _set_builder_input(self, obj, key, value, path=()):
+        """Set a calculator parameter on a builder, recursing into AiiDA input namespaces.
+
+        Dictionary values that target an AiiDA input namespace (a
+        ``ProcessBuilderNamespace``, e.g. the ``abacus`` namespace of
+        ``AbacusBaseWorkChain``) are assigned key by key. Assigning the whole
+        namespace at once would validate the partial dictionary against all
+        required sub-ports (failing while the generated structure has not been
+        injected yet) and would discard values set previously in that
+        namespace.
+
+        Args:
+            obj: AiiDA process builder or nested builder namespace.
+            key: Parameter name (builder port name).
+            value: Parameter value; plain values are set directly.
+            path: Namespace path leading to ``key`` (for error reporting).
+
+        Raises:
+            StructureGenerationError: If the value is rejected by the builder.
+        """
+        if isinstance(value, dict):
+            nested = getattr(obj, key, None)
+            if isinstance(nested, ProcessBuilderNamespace):
+                for sub_key, sub_value in value.items():
+                    self._set_builder_input(nested, sub_key, sub_value, path=(*path, key))
+                return
+        try:
+            setattr(obj, key, value)
+        except (AttributeError, ValueError, TypeError) as exc:
+            name = ".".join((*path, key))
+            raise StructureGenerationError(
+                f"Failed to set calculator parameter '{name}' on the builder: {exc}"
+            ) from exc
+
     def get_builder(self, x, target_index: int | None = None):
         """Return a process builder for the calculator workchain with a structure derived from ``x``.
 
@@ -431,7 +466,7 @@ class StructureCalculator:
             )
 
         for key, value in parameters.items():
-            setattr(builder, key, value)
+            self._set_builder_input(builder, key, value)
         try:
             self.set_nested(builder, self.structure_keyword, new_structure)
         except StructureGenerationError as exc:

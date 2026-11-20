@@ -1,6 +1,6 @@
 # Atomic structure optimization by AiiDA and PyMOO
 
-`aiida-reoptimize` is a framework for running advanced optimization workflows in computational materials science and chemistry, leveraging the AiiDA workflows and the [PyMOO](https://pymoo.org) external optimization library. Both lattice and atomic positions optimizations are supported. Two simulation engines were tested: [CRYSTAL](https://www.crystal.unito.it) and [FLEUR](https://www.flapw.de). See [documentation](https://mpds-io.github.io/aiida-reoptimize/index.html).
+`aiida-reoptimize` is a framework for running advanced optimization workflows in computational materials science and chemistry, leveraging the AiiDA workflows and the [PyMOO](https://pymoo.org) external optimization library. Both lattice and atomic positions optimizations are supported. Three simulation engines are tested: [CRYSTAL](https://www.crystal.unito.it), [FLEUR](https://www.flapw.de), and [ABACUS](https://abacus.deepmodeling.com). See [documentation](https://mpds-io.github.io/aiida-reoptimize/index.html).
 
 
 ## Features
@@ -36,17 +36,21 @@ The package ships importable static AiiDA workchains under [aiida_reoptimize/wor
   - `aiida_reoptimize.CrystalLatticeProblem`: evaluate lattice distortions with `BaseCrystalWorkChain`
   - `aiida_reoptimize.FleurSCFLatticeProblem`: evaluate lattice distortions with `FleurScfWorkChain`
   - `aiida_reoptimize.FleurRelaxLatticeProblem`: evaluate lattice distortions with `FleurRelaxWorkChain`
+  - `aiida_reoptimize.AbacusSCFLatticeProblem`: evaluate lattice distortions with `AbacusBaseWorkChain`
+  - `aiida_reoptimize.AbacusRelaxLatticeProblem`: evaluate lattice distortions with `AbacusRelaxWorkChain`
 - Optimization workchains:
   - CRYSTAL: `AdamCrystalOptimizer`, `CDGCrystalOptimizer`, `RMSpropCrystalOptimizer`, `BFGSCrystalOptimizer`, `PyMOOCrystalOptimizer`, `G3PCXCrystalOptimizer`, `NRBOCrystalOptimizer`
   - FLEUR SCF: `AdamFleurSCFOptimizer`, `CDGFleurSCFOptimizer`, `RMSpropFleurSCFOptimizer`, `BFGSFleurSCFOptimizer`, `PyMOOFleurSCFOptimizer`, `G3PCXFleurSCFOptimizer`, `NRBOFleurSCFOptimizer`
   - FLEUR relax: `AdamFleurRelaxOptimizer`, `CDGFleurRelaxOptimizer`, `RMSpropFleurRelaxOptimizer`, `BFGSFleurRelaxOptimizer`, `PyMOOFleurRelaxOptimizer`, `G3PCXFleurRelaxOptimizer`, `NRBOFleurRelaxOptimizer`
+  - ABACUS SCF: `AdamAbacusSCFOptimizer`, `CDGAbacusSCFOptimizer`, `RMSpropAbacusSCFOptimizer`, `BFGSAbacusSCFOptimizer`, `PyMOOAbacusSCFOptimizer`, `G3PCXAbacusSCFOptimizer`, `NRBOAbacusSCFOptimizer`
+  - ABACUS relax: `AdamAbacusRelaxOptimizer`, `CDGAbacusRelaxOptimizer`, `RMSpropAbacusRelaxOptimizer`, `BFGSAbacusRelaxOptimizer`, `PyMOOAbacusRelaxOptimizer`, `G3PCXAbacusRelaxOptimizer`, `NRBOAbacusRelaxOptimizer`
 
 Static lattice evaluators share the same core inputs:
 
 - `structure`: source `StructureData`
 - `targets`: list of lattice perturbations to evaluate
 - `calculator_parameters`: inputs forwarded to the underlying calculator workchain
-- `structure_keyword`: optional path to the structure input in the target builder, defaults to `['structure']`
+- `structure_keyword`: optional path to the structure input in the target builder, defaults to `['structure']` (`['abacus', 'structure']` for `AbacusSCFLatticeProblem`, whose calculation inputs live in the `abacus` namespace)
 
 ### How To Add A Custom Static Workflow
 

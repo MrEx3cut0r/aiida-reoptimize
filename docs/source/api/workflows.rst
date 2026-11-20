@@ -13,6 +13,12 @@ Evaluation
 .. autoclass:: aiida_reoptimize.workflows.Evaluation.fleur_evaluators.FleurRelaxLatticeProblem
    :members:
 
+.. autoclass:: aiida_reoptimize.workflows.Evaluation.abacus_evaluation.AbacusSCFLatticeProblem
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Evaluation.abacus_evaluation.AbacusRelaxLatticeProblem
+   :members:
+
 Common Helpers
 ---------------
 
@@ -103,4 +109,58 @@ FLEUR Relax Optimizers
    :members:
 
 .. autoclass:: aiida_reoptimize.workflows.Optimization.FleurRelax.NRBOFleurRelaxOptimizer
+   :members:
+
+ABACUS SCF Optimizers
+----------------------
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.BaseAbacusSCFOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.AdamAbacusSCFOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.CDGAbacusSCFOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.RMSpropAbacusSCFOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.BFGSAbacusSCFOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.PyMOOAbacusSCFOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.G3PCXAbacusSCFOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.NRBOAbacusSCFOptimizer
+   :members:
+
+ABACUS Relax Optimizers
+------------------------
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.BaseAbacusRelaxOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.AdamAbacusRelaxOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.CDGAbacusRelaxOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.RMSpropAbacusRelaxOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.BFGSAbacusRelaxOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.PyMOOAbacusRelaxOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.G3PCXAbacusRelaxOptimizer
+   :members:
+
+.. autoclass:: aiida_reoptimize.workflows.Optimization.Abacus.NRBOAbacusRelaxOptimizer
    :members:

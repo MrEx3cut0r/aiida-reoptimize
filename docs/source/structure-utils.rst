@@ -23,6 +23,17 @@ a :class:`~aiida_reoptimize.structure.dynamic_structure.DynamicStructure` with a
 calculator WorkChain. It produces a ready-to-submit process builder for each
 parameter vector, inserting the modified structure at a configurable nested path.
 
+.. note::
+
+   Calculator parameters are set on the builder one by one. Dictionary values
+   that target an AiiDA input namespace (e.g. ``abacus`` of
+   ``AbacusBaseWorkChain``) are set key by key, so partial namespaces are
+   accepted and previously set values are preserved. Values rejected by the
+   builder — unknown ports (in non-dynamic namespaces) or wrong types — raise
+   :class:`~aiida_reoptimize.structure.dynamic_structure.StructureGenerationError`,
+   which the static evaluators report as the
+   ``ERROR_STRUCTURE_GENERATION_FAILED`` exit code.
+
 .. autoclass:: aiida_reoptimize.structure.dynamic_structure.StructureCalculator
    :members:
 

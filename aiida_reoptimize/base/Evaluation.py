@@ -265,6 +265,9 @@ class _StaticEvalStructureBase(WorkChain):
 
         Args:
             code_dict: Dictionary mapping parameter names to code labels (str) or PKs (int).
+                Keys may be dotted paths addressing nested calculator parameters,
+                e.g. ``"abacus.code"`` for ``AbacusBaseWorkChain`` or
+                ``"base.abacus.code"`` for ``AbacusRelaxWorkChain``.
 
         Returns:
             Dictionary mapping parameter names to loaded Code/Node objects.
@@ -306,13 +309,47 @@ class _StaticEvalStructureBase(WorkChain):
             calculator_parameters["basis_family"] = basis_family
         return calculator_parameters
 
+    @staticmethod
+    def _place_loaded_code(calculator_parameters: dict[str, Any], key: str, code) -> None:
+        """Insert a loaded code node at a possibly nested (dotted) parameter path.
+
+        Keys without a dot address top-level calculator parameters (e.g.
+        ``"fleur"``); dotted keys address nested namespaces (e.g.
+        ``"abacus.code"`` or ``"base.abacus.code"``).
+
+        Args:
+            calculator_parameters: Calculator parameters to update in place.
+            key: Parameter path of the code, with ``.`` as namespace separator.
+            code: Loaded Code/Node object.
+
+        Raises:
+            ValueError: If an intermediate path element is not a nested mapping.
+        """
+
+        path = key.split(".")
+        target = calculator_parameters
+        for nested_key in path[:-1]:
+            nested_value = target.setdefault(nested_key, {})
+            if not isinstance(nested_value, dict):
+                raise ValueError(
+                    f"Cannot place code '{key}': '{nested_key}' in calculator parameters "
+                    f"does not address a nested namespace."
+                )
+            target = nested_value
+        target[path[-1]] = code
+
     def prepare_calculator_parameters(self) -> dict[str, Any]:
-        """Resolve loadable codes and optional basis families."""
+        """Resolve loadable codes and optional basis families.
+
+        Code entries of the ``codes`` mapping may use dotted paths to address
+        nested calculator parameters.
+        """
 
         calculator_parameters = self.inputs.calculator_parameters.get_dict()
         codes = calculator_parameters.pop("codes", {})
         if codes:
-            calculator_parameters.update(self.load_codes(codes))
+            for key, code in self.load_codes(codes).items():
+                self._place_loaded_code(calculator_parameters, key, code)
         return self.handle_basis_family(calculator_parameters)
 
     def generate_structures(self):

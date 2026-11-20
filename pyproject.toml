@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering :: Information Analysis"
 ]
-keywords = ["aiida", "plugin", "fleur", "crystal"]
+keywords = ["aiida", "plugin", "fleur", "crystal", "abacus"]
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.10,<3.16"
@@ -35,6 +35,7 @@ dependencies = [
     "spglib>=2.6.0",
     "ase-fleur @ git+https://github.com/JuDFTteam/ase-fleur",
     "aiida-fleur>=2.0.0",
+    "aiida-abacus>=0.3.1,<0.4",
     "aiida-crystal-dft @ git+https://github.com/tilde-lab/aiida-crystal-dft"
 ]
 
@@ -63,9 +64,25 @@ Source = "https://github.com/mpds-io/aiida-reoptimize"
 "reoptimize.PyMOOCrystalOptimizer" = "aiida_reoptimize.workflows.Optimization.Crystal:PyMOOCrystalOptimizer"
 "reoptimize.G3PCXCrystalOptimizer" = "aiida_reoptimize.workflows.Optimization.Crystal:G3PCXCrystalOptimizer"
 "reoptimize.NRBOCrystalOptimizer" = "aiida_reoptimize.workflows.Optimization.Crystal:NRBOCrystalOptimizer"
+"reoptimize.AdamAbacusSCFOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:AdamAbacusSCFOptimizer"
+"reoptimize.CDGAbacusSCFOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:CDGAbacusSCFOptimizer"
+"reoptimize.RMSpropAbacusSCFOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:RMSpropAbacusSCFOptimizer"
+"reoptimize.BFGSAbacusSCFOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:BFGSAbacusSCFOptimizer"
+"reoptimize.PyMOOAbacusSCFOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:PyMOOAbacusSCFOptimizer"
+"reoptimize.G3PCXAbacusSCFOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:G3PCXAbacusSCFOptimizer"
+"reoptimize.NRBOAbacusSCFOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:NRBOAbacusSCFOptimizer"
+"reoptimize.AdamAbacusRelaxOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:AdamAbacusRelaxOptimizer"
+"reoptimize.CDGAbacusRelaxOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:CDGAbacusRelaxOptimizer"
+"reoptimize.RMSpropAbacusRelaxOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:RMSpropAbacusRelaxOptimizer"
+"reoptimize.BFGSAbacusRelaxOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:BFGSAbacusRelaxOptimizer"
+"reoptimize.PyMOOAbacusRelaxOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:PyMOOAbacusRelaxOptimizer"
+"reoptimize.G3PCXAbacusRelaxOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:G3PCXAbacusRelaxOptimizer"
+"reoptimize.NRBOAbacusRelaxOptimizer" = "aiida_reoptimize.workflows.Optimization.Abacus:NRBOAbacusRelaxOptimizer"
 "reoptimize.FleurSCFLatticeProblem" = "aiida_reoptimize.workflows.Evaluation.fleur_evaluators:FleurSCFLatticeProblem"
 "reoptimize.FleurRelaxLatticeProblem" = "aiida_reoptimize.workflows.Evaluation.fleur_evaluators:FleurRelaxLatticeProblem"
 "reoptimize.CrystalLatticeProblem" = "aiida_reoptimize.workflows.Evaluation.crystal_evaluation:CrystalLatticeProblem"
+"reoptimize.AbacusSCFLatticeProblem" = "aiida_reoptimize.workflows.Evaluation.abacus_evaluation:AbacusSCFLatticeProblem"
+"reoptimize.AbacusRelaxLatticeProblem" = "aiida_reoptimize.workflows.Evaluation.abacus_evaluation:AbacusRelaxLatticeProblem"
 
 [dependency-groups]
 dev = [
